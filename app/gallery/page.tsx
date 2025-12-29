@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowLeft, Image as ImageIcon, Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const GALLERY = [
-  { src: "/gall/doc-pfp.jpeg", title: "Medical Professional", category: "Doctors" },
   { src: "/gall/doc1.jpeg", title: "Senior Doctor", category: "Doctors" },
   { src: "/gall/hospital-outer1.jpeg", title: "Hospital Building Exterior", category: "Building" },
   { src: "/gall/hospital-outer2.jpeg", title: "Hospital Front View", category: "Building" },
