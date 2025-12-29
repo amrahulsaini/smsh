@@ -92,10 +92,10 @@ export default function GalleryPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
                 
-                {/* Fullscreen Button */}
+                {/* Fullscreen Button - Always visible on mobile */}
                 <button
                   onClick={() => openFullscreen(idx)}
-                  className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm opacity-0 transition-all hover:bg-black/80 group-hover:opacity-100"
+                  className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-all hover:bg-black/80 sm:opacity-0 sm:group-hover:opacity-100"
                   aria-label="View fullscreen"
                 >
                   <Maximize2 className="h-5 w-5" strokeWidth={2.5} />
