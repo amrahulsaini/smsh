@@ -103,8 +103,8 @@ export default function Home() {
                   className="h-full w-full object-contain transition-transform hover:scale-105"
                 />
               </div>
-              {/* Floating Stats */}
-              <div className="absolute -bottom-6 left-4 right-4 grid grid-cols-3 gap-2 sm:gap-3">
+              {/* Floating Stats - Hidden on mobile */}
+              <div className="absolute -bottom-6 left-4 right-4 hidden grid-cols-3 gap-2 sm:grid sm:gap-3">
                 <div className="rounded-2xl border-2 border-white bg-gradient-to-br from-primary to-primary-hover p-4 text-center shadow-xl">
                   <div className="text-2xl font-extrabold text-white">24/7</div>
                   <div className="text-xs font-semibold text-white/90">Available</div>

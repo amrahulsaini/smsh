@@ -1,14 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Phone, MessageCircle, Menu } from "lucide-react";
+import { Phone, MessageCircle, Menu, X } from "lucide-react";
 import { HOSPITAL, whatsappLink } from "./site-constants";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleServicesClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    setIsMobileMenuOpen(false);
     if (pathname !== "/") {
       return; // Let it navigate to /#services
     }
@@ -17,6 +20,10 @@ export function SiteHeader() {
     if (servicesSection) {
       servicesSection.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -70,11 +77,60 @@ export function SiteHeader() {
             <MessageCircle className="h-4 w-4 transition-transform group-hover:scale-110" />
             <span className="hidden sm:inline">WhatsApp</span>
           </a>
-          <button className="inline-flex items-center justify-center rounded-full border-2 border-border p-2 text-slate-700 hover:bg-muted lg:hidden">
-            <Menu className="h-5 w-5" />
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="inline-flex items-center justify-center rounded-full border-2 border-border p-2 text-slate-700 hover:bg-muted lg:hidden"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="border-t border-border bg-background lg:hidden animate-[slide-up_0.3s_ease-out]">
+          <nav className="mx-auto flex w-full max-w-7xl flex-col px-4 py-4">
+            <Link 
+              href="/" 
+              onClick={closeMobileMenu}
+              className="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition-colors hover:bg-primary-light hover:text-primary"
+            >
+              Home
+            </Link>
+            <Link 
+              href="/gallery" 
+              onClick={closeMobileMenu}
+              className="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition-colors hover:bg-primary-light hover:text-primary"
+            >
+              Gallery
+            </Link>
+            <a 
+              href="/#services" 
+              onClick={handleServicesClick}
+              className="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition-colors hover:bg-primary-light hover:text-primary"
+            >
+              Services
+            </a>
+            <a 
+              href="#contact" 
+              onClick={closeMobileMenu}
+              className="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition-colors hover:bg-primary-light hover:text-primary"
+            >
+              Contact
+            </a>
+            <div className="mt-4 border-t border-border pt-4">
+              <a
+                href={`tel:${HOSPITAL.phoneE164}`}
+                className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-primary/20 bg-primary-light px-4 py-3 text-sm font-bold text-primary transition-all hover:border-primary hover:bg-primary hover:text-white"
+              >
+                <Phone className="h-4 w-4" />
+                Call {HOSPITAL.phoneDisplay}
+              </a>
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
