@@ -7,7 +7,6 @@ import { ArrowLeft, Image as ImageIcon, Maximize2, X, ChevronLeft, ChevronRight 
 const GALLERY = [
   { src: "/gall/doc-pfp.jpeg", title: "Medical Professional", category: "Doctors" },
   { src: "/gall/doc1.jpeg", title: "Senior Doctor", category: "Doctors" },
-  { src: "/gall/doc2.jpeg", title: "Specialist Doctor", category: "Doctors" },
   { src: "/gall/hospital-outer1.jpeg", title: "Hospital Building Exterior", category: "Building" },
   { src: "/gall/hospital-outer2.jpeg", title: "Hospital Front View", category: "Building" },
   { src: "/gall/reception1.jpeg", title: "Main Reception Area", category: "Reception" },
