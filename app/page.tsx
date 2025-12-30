@@ -18,6 +18,7 @@ import {
   Users,
   Shield,
   Building2,
+  Bot,
 } from "lucide-react";
 import { HOSPITAL, mapsLink, whatsappLink } from "../components/site-constants";
 
@@ -90,7 +91,7 @@ export default function Home() {
                 <img
                   src="/banner/hero-banner.jpg"
                   alt="Sahara Multi Speciality Hospital"
-                  className="h-full w-full object-contain transition-transform hover:scale-105"
+                  className="h-full w-full object-cover transition-transform hover:scale-105"
                 />
               </div>
               {/* Floating Stats - Hidden on mobile */}

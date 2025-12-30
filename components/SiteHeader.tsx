@@ -5,10 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Phone, MessageCircle, Menu, X } from "lucide-react";
 import { HOSPITAL, whatsappLink } from "./site-constants";
+import { AppointmentModal } from "./AppointmentModal";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showAppointmentModal, setShowAppointmentModal] = useState(false);
 
   const handleServicesClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     setIsMobileMenuOpen(false);
@@ -61,13 +63,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href="#appointment-info"
+          <button
+            onClick={() => setShowAppointmentModal(true)}
             className="group hidden items-center gap-2 rounded-full border-2 border-accent/20 bg-gradient-to-r from-accent to-orange-600 px-4 py-2.5 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg md:inline-flex"
           >
             <Phone className="h-4 w-4 transition-transform group-hover:rotate-12" />
             Book Appointment
-          </a>
+          </button>
           <a
             href={`tel:${HOSPITAL.phoneE164}`}
             className="group hidden items-center gap-2 rounded-full border-2 border-primary/20 bg-primary-light px-4 py-2.5 text-sm font-bold text-primary transition-all hover:border-primary hover:bg-primary hover:text-white hover:shadow-lg sm:inline-flex md:hidden"
@@ -138,6 +140,8 @@ export function SiteHeader() {
           </nav>
         </div>
       )}
+      
+      <AppointmentModal isOpen={showAppointmentModal} onClose={() => setShowAppointmentModal(false)} />
     </header>
   );
 }
