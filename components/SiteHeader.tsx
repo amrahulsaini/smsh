@@ -65,7 +65,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowAppointmentModal(true)}
-            className="group hidden items-center gap-2 rounded-full border-2 border-accent/20 bg-gradient-to-r from-accent to-orange-600 px-4 py-2.5 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg md:inline-flex"
+            className="group inline-flex items-center gap-2 rounded-full border-2 border-accent/20 bg-gradient-to-r from-accent to-orange-600 px-4 py-2.5 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
           >
             <Phone className="h-4 w-4 transition-transform group-hover:rotate-12" />
             Book Appointment
@@ -81,7 +81,7 @@ export function SiteHeader() {
             href={whatsappLink(`Hello ${HOSPITAL.name}! I want to book an appointment.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-xl hover:scale-105"
+            className="group hidden items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-xl hover:scale-105 md:inline-flex"
           >
             <MessageCircle className="h-4 w-4 transition-transform group-hover:scale-110" />
             <span className="hidden sm:inline">WhatsApp</span>

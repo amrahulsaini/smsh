@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { HOSPITAL, mapsLink, whatsappLink } from "./site-constants";
 
 export function SiteFooter() {
@@ -24,29 +24,6 @@ export function SiteFooter() {
             Providing trusted multi-speciality medical care in Rajgarh, Churu (Rajasthan). 
             Your health and well-being are our top priorities.
           </p>
-          <div className="flex gap-3">
-            <a
-              href="#"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary transition-all hover:bg-primary hover:text-white"
-              aria-label="Facebook"
-            >
-              <Facebook className="h-5 w-5" />
-            </a>
-            <a
-              href="#"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary transition-all hover:bg-primary hover:text-white"
-              aria-label="Instagram"
-            >
-              <Instagram className="h-5 w-5" />
-            </a>
-            <a
-              href="#"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary transition-all hover:bg-primary hover:text-white"
-              aria-label="Twitter"
-            >
-              <Twitter className="h-5 w-5" />
-            </a>
-          </div>
         </div>
 
         {/* Address */}
