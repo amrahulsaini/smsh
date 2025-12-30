@@ -62,8 +62,15 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <a
+            href="#appointment-info"
+            className="group hidden items-center gap-2 rounded-full border-2 border-accent/20 bg-gradient-to-r from-accent to-orange-600 px-4 py-2.5 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg md:inline-flex"
+          >
+            <Phone className="h-4 w-4 transition-transform group-hover:rotate-12" />
+            Book Appointment
+          </a>
+          <a
             href={`tel:${HOSPITAL.phoneE164}`}
-            className="group hidden items-center gap-2 rounded-full border-2 border-primary/20 bg-primary-light px-4 py-2.5 text-sm font-bold text-primary transition-all hover:border-primary hover:bg-primary hover:text-white hover:shadow-lg sm:inline-flex"
+            className="group hidden items-center gap-2 rounded-full border-2 border-primary/20 bg-primary-light px-4 py-2.5 text-sm font-bold text-primary transition-all hover:border-primary hover:bg-primary hover:text-white hover:shadow-lg sm:inline-flex md:hidden"
           >
             <Phone className="h-4 w-4 transition-transform group-hover:rotate-12" />
             Call

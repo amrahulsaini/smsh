@@ -622,6 +622,121 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Appointment Information Section */}
+      <section id="appointment-info" className="border-t border-border bg-gradient-to-br from-muted to-background py-16">
+        <div className="mx-auto w-full max-w-7xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+              Book Your Appointment
+            </h2>
+            <p className="mt-4 text-lg text-slate-700">
+              Easy appointment booking - Choose your preferred method
+            </p>
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-3">
+            {/* Method 1: AI Assistant */}
+            <div className="group relative overflow-hidden rounded-3xl border-2 border-border bg-background p-8 shadow-lg transition-all hover:border-secondary hover:shadow-2xl hover:scale-105">
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-secondary to-secondary-hover shadow-lg">
+                  <Bot className="h-10 w-10 text-white" strokeWidth={2} />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">AI Assistant Chat</h3>
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  Chat with our AI assistant in the bottom-right corner. It will guide you through the booking process step-by-step and send your details directly to our team.
+                </p>
+                <div className="space-y-2 text-left w-full">
+                  <div className="flex items-start gap-2 text-sm text-slate-600">
+                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span>24/7 Available</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-sm text-slate-600">
+                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span>Instant Response</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-sm text-slate-600">
+                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span>Guided Booking</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Method 2: Phone Call */}
+            <div className="group relative overflow-hidden rounded-3xl border-2 border-primary bg-gradient-to-br from-primary-light to-background p-8 shadow-lg transition-all hover:shadow-2xl hover:scale-105">
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary-hover shadow-lg animate-pulse">
+                  <Phone className="h-10 w-10 text-white" strokeWidth={2} />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">Call Directly</h3>
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  Speak directly with our staff to book your appointment. Available 24/7 for emergencies and general appointments.
+                </p>
+                <a
+                  href={`tel:${HOSPITAL.phoneE164}`}
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-bold text-white shadow-lg transition-all hover:scale-105"
+                >
+                  <Phone className="h-5 w-5" />
+                  {HOSPITAL.phoneDisplay}
+                </a>
+                <div className="flex items-center gap-2 text-xs font-semibold text-primary">
+                  <Clock className="h-4 w-4" />
+                  Open 24/7
+                </div>
+              </div>
+            </div>
+
+            {/* Method 3: WhatsApp */}
+            <div className="group relative overflow-hidden rounded-3xl border-2 border-border bg-background p-8 shadow-lg transition-all hover:border-green-500 hover:shadow-2xl hover:scale-105">
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-green-600 shadow-lg">
+                  <MessageCircle className="h-10 w-10 text-white" strokeWidth={2} />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">WhatsApp Booking</h3>
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  Send us a WhatsApp message with your appointment details. Quick, convenient, and you get instant confirmation.
+                </p>
+                <a
+                  href={whatsappLink(`Hello! I would like to book an appointment.\n\nName: \nPhone: \nDepartment: \nPreferred Date: \nPreferred Time: `)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-500 to-green-600 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all hover:scale-105"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  WhatsApp Now
+                </a>
+                <div className="flex items-center gap-2 text-xs font-semibold text-green-600">
+                  <CheckCircle2 className="h-4 w-4" />
+                  Quick Response
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* What to Expect */}
+          <div className="mt-16 rounded-3xl border-2 border-primary/20 bg-gradient-to-br from-primary-light via-background to-secondary-light p-8 shadow-xl">
+            <h3 className="text-center text-2xl font-bold text-foreground mb-8">What to Expect</h3>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { step: "1", title: "Share Details", desc: "Provide your name, contact, and preferred department", icon: "📝" },
+                { step: "2", title: "Choose Date & Time", desc: "Select your preferred appointment slot", icon: "📅" },
+                { step: "3", title: "Get Confirmation", desc: "We'll contact you within 24 hours", icon: "✅" },
+                { step: "4", title: "Visit Hospital", desc: "Come for your scheduled appointment", icon: "🏥" },
+              ].map((item, idx) => (
+                <div key={idx} className="text-center space-y-3 animate-[slide-up_0.6s_ease-out]" style={{ animationDelay: `${idx * 0.1}s` }}>
+                  <div className="text-4xl">{item.icon}</div>
+                  <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-sm font-black text-white">
+                    {item.step}
+                  </div>
+                  <h4 className="font-bold text-foreground">{item.title}</h4>
+                  <p className="text-sm text-slate-700">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact CTA */}
       <section className="border-t border-border bg-gradient-to-br from-primary via-primary-hover to-secondary py-16">
         <div className="mx-auto w-full max-w-7xl px-4 text-center">
