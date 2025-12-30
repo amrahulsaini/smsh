@@ -5,6 +5,7 @@ import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { WhatsAppButton } from "../components/WhatsAppButton";
 import { AIAssistant } from "../components/AIAssistant";
+import { AppointmentButton } from "../components/AppointmentButton";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -46,6 +47,7 @@ export default function RootLayout({
           <SiteHeader />
           <main>{children}</main>
           <SiteFooter />
+          <AppointmentButton />
           <WhatsAppButton />
           <AIAssistant />
         </div>

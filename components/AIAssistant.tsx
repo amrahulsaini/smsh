@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Bot, X, Send } from "lucide-react";
+import { Bot, X, Send, Calendar } from "lucide-react";
 import { HOSPITAL, whatsappLink } from "./site-constants";
+import { AppointmentModal } from "./AppointmentModal";
 
 const FAQ_RESPONSES = [
   {
@@ -22,8 +23,8 @@ const FAQ_RESPONSES = [
     response: `You can call us at ${HOSPITAL.phoneDisplay} or WhatsApp us. We're happy to help!`,
   },
   {
-    keywords: ["appointment", "book", "schedule"],
-    response: `To book an appointment, please call ${HOSPITAL.phoneDisplay} or WhatsApp us. Our staff will schedule you with the appropriate doctor.`,
+    keywords: ["appointment", "book", "schedule", "reservation"],
+    response: `I can help you book an appointment! Click the "Book Appointment" button below to get started with online booking.`,
   },
   {
     keywords: ["emergency", "urgent", "immediate"],
@@ -37,6 +38,7 @@ const FAQ_RESPONSES = [
 
 export function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showAppointmentModal, setShowAppointmentModal] = useState(false);
   const [messages, setMessages] = useState<Array<{ text: string; isBot: boolean }>>([
     {
       text: `Hello! I'm your virtual assistant for ${HOSPITAL.name}. How can I help you today?`,
@@ -77,6 +79,11 @@ export function AIAssistant() {
   };
 
   const handleQuickAction = (label: string) => {
+    if (label === "Appointment") {
+      setShowAppointmentModal(true);
+      setIsOpen(false);
+      return;
+    }
     handleSend(label);
   };
 
@@ -86,7 +93,7 @@ export function AIAssistant() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="group fixed bottom-28 right-6 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full border-2 border-secondary/20 bg-gradient-to-r from-secondary to-secondary-hover shadow-2xl transition-all hover:scale-110 hover:shadow-secondary/50 animate-[pulse-glow_2s_ease-in-out_infinite] sm:h-16 sm:w-16"
+          className="group fixed bottom-44 right-6 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full border-2 border-secondary/20 bg-gradient-to-r from-secondary to-secondary-hover shadow-2xl transition-all hover:scale-110 hover:shadow-secondary/50 animate-[pulse-glow_2s_ease-in-out_infinite] sm:h-16 sm:w-16"
           aria-label="Open AI Assistant"
         >
           <Bot className="h-7 w-7 text-white transition-transform group-hover:rotate-12 sm:h-8 sm:w-8" strokeWidth={2.5} />
@@ -181,6 +188,15 @@ export function AIAssistant() {
 
           {/* Footer */}
           <div className="rounded-b-3xl bg-slate-900 px-4 py-2.5 text-center sm:px-5 sm:py-3">
+            <button
+              onClick={() => {
+                setShowAppointmentModal(true);
+                setIsOpen(false);
+              }}
+              className="mb-2 w-full rounded-full bg-gradient-to-r from-primary to-secondary px-4 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:scale-105"
+            >
+              📅 Book Appointment Online
+            </button>
             <a
               href={whatsappLink(`Hello! I need assistance.`)}
               target="_blank"
@@ -192,6 +208,9 @@ export function AIAssistant() {
           </div>
         </div>
       )}
+
+      {/* Appointment Modal */}
+      <AppointmentModal isOpen={showAppointmentModal} onClose={() => setShowAppointmentModal(false)} />
     </>
   );
 }
