@@ -24,8 +24,11 @@ export const metadata: Metadata = {
   description:
     "Sahara Multi Speciality Hospital (Rajgarh, Churu, Rajasthan) — General Medicine, Neuro Medicine, Pediatric care, Health Screening, Physiotherapy/Rehabilitation, Diagnosis & Treatment. 24/7.",
   icons: {
-    icon: "/gall/favicon.jpeg",
+    icon: [
+      { url: "/gall/favicon.jpeg", sizes: "any" },
+    ],
     apple: "/gall/favicon.jpeg",
+    shortcut: "/gall/favicon.jpeg",
   },
 };
 

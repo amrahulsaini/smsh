@@ -31,16 +31,6 @@ export default function Home() {
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-16">
             {/* Left Content */}
             <div className="flex flex-col justify-center space-y-6 animate-[slide-up_0.6s_ease-out]">
-              <div className="inline-flex w-fit items-start gap-3 rounded-2xl border-2 border-primary/20 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 p-4 shadow-lg">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary">
-                  <Clock className="h-5 w-5 text-white" strokeWidth={2.5} />
-                </div>
-                <div>
-                  <div className="text-sm font-bold text-foreground">Available 24/7</div>
-                  <div className="text-xs text-slate-600">Multi-Speciality Care</div>
-                </div>
-              </div>
-
               <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                 Your Health, <br />
                 <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">

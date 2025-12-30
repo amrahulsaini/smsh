@@ -30,7 +30,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 shadow-sm">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4">
         <Link href="/" className="group flex items-center gap-3 transition-transform hover:scale-[1.02]">
-          <div className="relative h-12 w-12 overflow-hidden rounded-xl border-2 border-primary/20 bg-white shadow-md transition-all group-hover:border-primary/40 group-hover:shadow-lg">
+          <div className="relative h-14 w-14 overflow-hidden rounded-full bg-white shadow-md transition-all group-hover:shadow-xl">
             <img
               src="/gall/favicon.jpeg"
               alt={`${HOSPITAL.name} logo`}
