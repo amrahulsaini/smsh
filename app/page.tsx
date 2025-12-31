@@ -54,10 +54,11 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-4 sm:flex-row">
+              <div className="flex flex-col gap-4 sm:flex-row" style={{ position: 'relative', zIndex: 10 }}>
                 <a
                   href={`tel:${HOSPITAL.phoneE164}`}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-4 text-base font-bold text-white shadow-xl transition-all hover:scale-105 hover:shadow-2xl"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-4 text-base font-bold text-white shadow-xl transition-all hover:scale-105 hover:shadow-2xl active:scale-95"
+                  style={{ cursor: 'pointer', userSelect: 'none', touchAction: 'manipulation' }}
                 >
                   <Phone className="h-5 w-5 transition-transform group-hover:rotate-12" />
                   Call {HOSPITAL.phoneDisplay}
@@ -66,7 +67,8 @@ export default function Home() {
                   href={whatsappLink(`Hello ${HOSPITAL.name}! I want to book an appointment.`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary bg-background px-8 py-4 text-base font-bold text-primary transition-all hover:bg-primary hover:text-white hover:shadow-xl"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary bg-background px-8 py-4 text-base font-bold text-primary transition-all hover:bg-primary hover:text-white hover:shadow-xl active:scale-95"
+                  style={{ cursor: 'pointer', userSelect: 'none', touchAction: 'manipulation' }}
                 >
                   <MessageCircle className="h-5 w-5 transition-transform group-hover:scale-110" />
                   WhatsApp
@@ -264,6 +266,10 @@ export default function Home() {
                   { icon: Heart, text: "Physiotherapy / Rehabilitation Services (फिजियोथेरेपी / रिहैबिलिटेशन सर्विसेज)", gradient: "from-red-500 to-red-600" },
                   { icon: Syringe, text: "Diagnosis & Treatment (डायग्नोसिस एंड ट्रीटमेंट)", gradient: "from-orange-500 to-orange-600" },
                   { icon: Clock, text: "24/7 Emergency Care (24/7)", gradient: "from-primary to-secondary" },
+                  { icon: Activity, text: "24 Hours Advance Path Lab", gradient: "from-teal-500 to-teal-600" },
+                  { icon: Heart, text: "ECG", gradient: "from-indigo-500 to-indigo-600" },
+                  { icon: Activity, text: "X RAY", gradient: "from-cyan-500 to-cyan-600" },
+                  { icon: Syringe, text: "ABG", gradient: "from-emerald-500 to-emerald-600" },
                 ].map((service, idx) => (
                   <div
                     key={idx}
@@ -577,7 +583,7 @@ export default function Home() {
                 Hospital Facilities & Gallery
               </h2>
               <p className="mt-2 text-lg text-slate-700">
-                Explore our modern facilities, patient rooms, and medical equipment
+                Explore our modern facilities, patient rooms, and medical equipment. सभी प्रमुख टीपीए में कैशलेस इलाज available.
               </p>
             </div>
             <Link
@@ -591,10 +597,10 @@ export default function Home() {
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { src: "/gall/privateroom1.jpeg", title: "Private Rooms", desc: "Comfortable AC rooms" },
-              { src: "/gall/beds-with-ac1.jpeg", title: "AC Patient Beds", desc: "Modern patient care" },
-              { src: "/gall/medicines-shop1.jpeg", title: "Pharmacy", desc: "24/7 medicine availability" },
-              { src: "/gall/lift1.jpeg", title: "Modern Lift", desc: "Easy floor access" },
+              { src: "/gall/privateroom1.jpeg", title: "Modern ICU", desc: "Advanced critical care" },
+              { src: "/gall/beds3.jpeg", title: "Single AC Room", desc: "Comfortable private care" },
+              { src: "/gall/medicines-shop1.jpeg", title: "Deluxe Room", desc: "Premium amenities" },
+              { src: "/gall/lift1.jpeg", title: "Semi Private Room", desc: "Shared comfort" },
             ].map((item, idx) => (
               <div
                 key={idx}

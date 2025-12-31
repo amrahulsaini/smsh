@@ -10,8 +10,6 @@ const GALLERY = [
   { src: "/gall/reception1.jpeg", title: "Main Reception Area", category: "Reception" },
   { src: "/gall/reception2.jpeg", title: "Reception Desk", category: "Reception" },
   { src: "/gall/privateroom1.jpeg", title: "Private Patient Room", category: "Rooms" },
-  { src: "/gall/generalwardroom1.jpeg", title: "General Ward Room", category: "Rooms" },
-  { src: "/gall/beds-with-ac1.jpeg", title: "AC Patient Beds", category: "Rooms" },
   { src: "/gall/beds1.jpeg", title: "Patient Beds Area", category: "Rooms" },
   { src: "/gall/beds3.jpeg", title: "ICU", category: "Rooms" },
   { src: "/gall/lift1.jpeg", title: "Modern Elevator", category: "Facilities" },

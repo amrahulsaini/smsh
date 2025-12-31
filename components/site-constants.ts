@@ -16,13 +16,18 @@ export const HOSPITAL = {
     "Physiotherapy / Rehabilitation Services (फिजियोथेरेपी / रिहैबिलिटेशन सर्विसेज)",
     "Diagnosis & Treatment (डायग्नोसिस एंड ट्रीटमेंट)",
     "24/7 Available (24/7)",
+    "24 Hours Advance Path Lab",
+    "ECG",
+    "X RAY",
+    "ABG",
   ],
 } as const;
 
 export function whatsappLink(message?: string) {
-  const base = `https://wa.me/${HOSPITAL.phoneE164.replace(/\D/g, "")}`;
+  const phone = HOSPITAL.phoneE164.replace(/\D/g, "");
+  const base = `https://api.whatsapp.com/send?phone=${phone}`;
   if (!message) return base;
-  return `${base}?text=${encodeURIComponent(message)}`;
+  return `${base}&text=${encodeURIComponent(message)}`;
 }
 
 export function mapsLink() {
