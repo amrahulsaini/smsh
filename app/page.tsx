@@ -572,7 +572,7 @@ export default function Home() {
       </section>
 
       {/* Facilities Preview */}
-      <section className="border-t border-border bg-gradient-to-br from-muted to-background py-16">
+      <section id="facilities" className="border-t border-border bg-gradient-to-br from-muted to-background py-16">
         <div className="mx-auto w-full max-w-7xl px-4">
           <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
             <div>

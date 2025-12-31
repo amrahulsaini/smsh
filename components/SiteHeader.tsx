@@ -57,6 +57,9 @@ export function SiteHeader() {
           <a href="/#services" onClick={handleServicesClick} className="relative transition-colors hover:text-primary after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full">
             Services
           </a>
+          <a href="/#facilities" className="relative transition-colors hover:text-primary after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full">
+            Facilities
+          </a>
           <a href="#contact" className="relative transition-colors hover:text-primary after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full">
             Contact
           </a>
@@ -120,6 +123,13 @@ export function SiteHeader() {
               className="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition-colors hover:bg-primary-light hover:text-primary"
             >
               Services
+            </a>
+            <a 
+              href="/#facilities" 
+              onClick={closeMobileMenu}
+              className="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition-colors hover:bg-primary-light hover:text-primary"
+            >
+              Facilities
             </a>
             <a 
               href="#contact" 
