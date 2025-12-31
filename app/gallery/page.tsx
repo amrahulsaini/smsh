@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowLeft, Image as ImageIcon, Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const GALLERY = [
-  { src: "/gall/doc1.jpeg", title: "Senior Doctor", category: "Doctors" },
   { src: "/gall/hospital-outer1.jpeg", title: "Hospital Building Exterior", category: "Building" },
   { src: "/gall/hospital-outer2.jpeg", title: "Hospital Front View", category: "Building" },
   { src: "/gall/reception1.jpeg", title: "Main Reception Area", category: "Reception" },
@@ -14,8 +13,7 @@ const GALLERY = [
   { src: "/gall/generalwardroom1.jpeg", title: "General Ward Room", category: "Rooms" },
   { src: "/gall/beds-with-ac1.jpeg", title: "AC Patient Beds", category: "Rooms" },
   { src: "/gall/beds1.jpeg", title: "Patient Beds Area", category: "Rooms" },
-  { src: "/gall/beds2.jpeg", title: "Ward Patient Beds", category: "Rooms" },
-  { src: "/gall/beds3.jpeg", title: "Patient Care Beds", category: "Rooms" },
+  { src: "/gall/beds3.jpeg", title: "ICU", category: "Rooms" },
   { src: "/gall/lift1.jpeg", title: "Modern Elevator", category: "Facilities" },
   { src: "/gall/medicines-shop1.jpeg", title: "Hospital Pharmacy", category: "Pharmacy" },
   { src: "/gall/medicines-shop2.jpeg", title: "Medicine Counter", category: "Pharmacy" },
@@ -76,7 +74,7 @@ export default function GalleryPage() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
           {GALLERY.map((item, idx) => (
             <figure
               key={item.src}

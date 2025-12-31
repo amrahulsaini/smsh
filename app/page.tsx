@@ -345,9 +345,9 @@ export default function Home() {
         <div className="mx-auto w-full max-w-7xl px-4">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { number: "10,000+", label: "Patients Treated", icon: "👥" },
+              { number: "5000+", label: "Patients Treated", icon: "👥" },
               { number: "24/7", label: "Emergency Services", icon: "🚨" },
-              { number: "15+", label: "Years Experience", icon: "⭐" },
+              { number: "5+", label: "Years Experience", icon: "⭐" },
               { number: "100%", label: "Patient Satisfaction", icon: "💚" },
             ].map((stat, idx) => (
               <div
