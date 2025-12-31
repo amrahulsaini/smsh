@@ -102,7 +102,7 @@ Date: ${data.date}
 Time: ${data.time}
 ${data.message ? `Message: ${data.message}` : ""}
         `.trim();
-        const mailtoLink = `mailto:saharamedicoserajgarh@gmail.com?subject=${encodeURIComponent(`Appointment Request - ${data.name}`)}&body=${encodeURIComponent(emailBody)}`;
+        const mailtoLink = `mailto:Smshospital14@gmail.com?subject=${encodeURIComponent(`Appointment Request - ${data.name}`)}&body=${encodeURIComponent(emailBody)}`;
         window.location.href = mailtoLink;
       }
     } catch (error) {
@@ -119,7 +119,7 @@ Date: ${data.date}
 Time: ${data.time}
 ${data.message ? `Message: ${data.message}` : ""}
       `.trim();
-      const mailtoLink = `mailto:saharamedicoserajgarh@gmail.com?subject=${encodeURIComponent(`Appointment Request - ${data.name}`)}&body=${encodeURIComponent(emailBody)}`;
+      const mailtoLink = `mailto:Smshospital14@gmail.com?subject=${encodeURIComponent(`Appointment Request - ${data.name}`)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoLink;
     }
   };

@@ -2,7 +2,7 @@ export const HOSPITAL = {
   name: "Sahara Multi Speciality Hospital",
   phoneDisplay: "+91 6376-060157",
   phoneE164: "+916376060157",
-  email: "saharamedicoserajgarh@gmail.com",
+  email: "Smshospital14@gmail.com",
   addressLines: [
     "Opposite Krishi Upaj Mandi, near bus stand, Rajgarh",
     "Rajgarh, Churu, Rajasthan 331023",
