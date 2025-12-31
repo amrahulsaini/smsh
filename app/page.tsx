@@ -166,9 +166,6 @@ export default function Home() {
                 </div>
                 <h3 className="relative mt-5 text-xl font-bold text-white">{item.title}</h3>
                 <p className="relative mt-3 text-sm leading-relaxed text-white/90">{item.desc}</p>
-                <div className="relative mt-4 inline-flex items-center gap-2 text-sm font-bold text-white opacity-0 transition-all group-hover:opacity-100">
-                  Learn More <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </div>
               </div>
             ))}
           </div>
@@ -595,13 +592,71 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { src: "/gall/privateroom1.jpeg", title: "Modern ICU", desc: "Advanced critical care" },
-              { src: "/gall/beds3.jpeg", title: "Single AC Room", desc: "Comfortable private care" },
-              { src: "/gall/medicines-shop1.jpeg", title: "Deluxe Room", desc: "Premium amenities" },
-              { src: "/gall/lift1.jpeg", title: "Semi Private Room", desc: "Shared comfort" },
-            ].map((item, idx) => (
+          <div className="mt-10 space-y-8">
+            {/* Facilities Cards */}
+            <div>
+              <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Our Patient Care Facilities</h3>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { 
+                    title: "Modern ICU", 
+                    icon: "🏥",
+                    desc: "State-of-the-art Intensive Care Unit with 24/7 monitoring and advanced life support systems.",
+                    features: ["24/7 Monitoring", "Ventilator Support", "Critical Care Specialists"]
+                  },
+                  { 
+                    title: "Single AC Room", 
+                    icon: "🛏️",
+                    desc: "Private air-conditioned rooms with modern amenities for comfortable patient recovery.",
+                    features: ["Private Bathroom", "TV & WiFi", "Attendant Bed"]
+                  },
+                  { 
+                    title: "Deluxe Room", 
+                    icon: "✨",
+                    desc: "Premium accommodation with spacious interiors and luxury amenities for enhanced comfort.",
+                    features: ["Spacious Layout", "Premium Bedding", "Mini Fridge"]
+                  },
+                  { 
+                    title: "Semi Private Room", 
+                    icon: "🚪",
+                    desc: "Comfortable shared accommodation with quality care at affordable rates.",
+                    features: ["2-3 Beds", "Shared Facilities", "Quality Care"]
+                  },
+                ].map((facility, idx) => (
+                  <div
+                    key={idx}
+                    className="group relative overflow-hidden rounded-2xl border-2 border-border bg-background p-6 shadow-lg transition-all hover:border-primary hover:shadow-2xl hover:scale-105 animate-[slide-up_0.6s_ease-out]"
+                    style={{ animationDelay: `${idx * 0.1}s` }}
+                  >
+                    <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-primary/5 transition-all group-hover:scale-150"></div>
+                    <div className="relative">
+                      <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary shadow-lg">
+                        <span className="text-3xl">{facility.icon}</span>
+                      </div>
+                      <h4 className="text-xl font-bold text-foreground mb-2">{facility.title}</h4>
+                      <p className="text-sm text-slate-700 mb-4 leading-relaxed">{facility.desc}</p>
+                      <div className="space-y-2">
+                        {facility.features.map((feature, fIdx) => (
+                          <div key={fIdx} className="flex items-center gap-2 text-xs text-slate-600">
+                            <CheckCircle2 className="h-4 w-4 text-primary flex-none" strokeWidth={2.5} />
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Gallery Grid */}
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { src: "/gall/privateroom1.jpeg", title: "Modern ICU", desc: "Advanced critical care" },
+                { src: "/gall/beds3.jpeg", title: "Single AC Room", desc: "Comfortable private care" },
+                { src: "/gall/medicines-shop1.jpeg", title: "Deluxe Room", desc: "Premium amenities" },
+                { src: "/gall/lift1.jpeg", title: "Semi Private Room", desc: "Shared comfort" },
+              ].map((item, idx) => (
               <div
                 key={idx}
                 className="group relative overflow-hidden rounded-2xl border-2 border-border bg-muted shadow-lg transition-all hover:border-primary hover:shadow-2xl hover:scale-105 hover:-translate-y-2 animate-[slide-up_0.6s_ease-out]"
@@ -625,6 +680,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
