@@ -121,10 +121,10 @@ export default function GalleryPage() {
           </p>
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
-              href="tel:+916376060157"
+              href="tel:+919251198569"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-bold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
             >
-              Call +91 6376-060157
+              Call +91 9251-198569
             </a>
             <Link
               href="/#services"
