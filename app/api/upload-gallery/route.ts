@@ -23,13 +23,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!process.env.BLOB_READ_WRITE_TOKEN) {
-      return NextResponse.json(
-        { error: "Image upload not configured. Please add BLOB_READ_WRITE_TOKEN environment variable in Vercel." },
-        { status: 500 }
-      );
-    }
-
     // Generate filename - sanitize category name
     const timestamp = Date.now();
     const sanitizedCategory = category.toLowerCase().replace(/[^a-z0-9]/g, "-");
