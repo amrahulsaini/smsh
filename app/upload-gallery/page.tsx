@@ -85,7 +85,10 @@ export default function UploadGalleryPage() {
         setCustomCategory("");
         setImageFile(null);
         setPreviewUrl(null);
-        loadGalleryImages();
+        
+        // Show the entry to copy
+        alert(`Image uploaded!\n\nCopy this and add to gallery.json:\n${JSON.stringify({ src: data.imageUrl, title, category: finalCategory }, null, 2)}`);
+        
         setTimeout(() => setUploadSuccess(false), 3000);
       } else {
         setError(data.error || "Upload failed");
@@ -216,7 +219,7 @@ export default function UploadGalleryPage() {
 
           <div className="mb-6 bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
             <p className="font-semibold mb-1">⚠️ Note:</p>
-            <p>Gallery upload feature requires Vercel Blob Storage. Please contact the administrator to enable this feature or manually update the gallery.json file in the repository.</p>
+            <p>After uploading, you'll need to manually copy the provided JSON entry and add it to <code className="bg-yellow-100 px-1 rounded">public/gallery.json</code> in your repository, then commit and push the changes.</p>
           </div>
 
           <form onSubmit={handleUpload} className="space-y-6">

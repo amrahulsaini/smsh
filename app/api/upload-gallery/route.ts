@@ -34,34 +34,14 @@ export async function POST(request: NextRequest) {
       access: "public",
     });
 
-    // Get existing gallery data
-    const galleryResponse = await fetch(`${process.env.VERCEL_URL || "http://localhost:3000"}/api/get-gallery`);
-    let galleryData = [];
-    if (galleryResponse.ok) {
-      galleryData = await galleryResponse.json();
-    }
-
-    // Add new entry
-    const newEntry = {
-      src: blob.url,
-      title: title,
-      category: category,
-    };
-    
-    galleryData.push(newEntry);
-
-    // Save updated gallery data
-    await fetch(`${process.env.VERCEL_URL || "http://localhost:3000"}/api/save-gallery`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(galleryData),
-    });
-
+    // Return success with the blob URL
+    // Note: You'll need to manually add this to gallery.json or use a database
     return NextResponse.json({
       success: true,
       fileName,
       imageUrl: blob.url,
-      message: "Image uploaded successfully",
+      message: "Image uploaded successfully! Add this entry to gallery.json: " + 
+               JSON.stringify({ src: blob.url, title, category }),
     });
   } catch (error) {
     console.error("Upload error:", error);
