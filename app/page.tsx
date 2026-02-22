@@ -43,7 +43,7 @@ export default function Home() {
           onClick={closeBanner}
         >
           <div 
-            className="relative w-full max-w-md"
+            className="relative w-full max-w-2xl"
             style={{ animation: 'slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)' }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -59,12 +59,12 @@ export default function Home() {
             {/* Banner Card */}
             <div className="bg-white rounded-xl shadow-2xl overflow-hidden border-2 border-gray-200">
               {/* Image */}
-              <div className="relative">
+              <div className="relative bg-gradient-to-br from-orange-50 to-white">
                 <img
                   src="/gall/medical-camp-feb2026.jpeg"
                   alt="Free Medical Camp - Dr. Prithvi Giri - February 22, 2026"
                   className="w-full h-auto"
-                  style={{ maxHeight: '500px', objectFit: 'contain' }}
+                  style={{ maxHeight: '70vh', objectFit: 'contain' }}
                 />
               </div>
               
@@ -72,10 +72,10 @@ export default function Home() {
               <div className="bg-gradient-to-r from-primary to-secondary p-3 text-center">
                 <a
                   href={`tel:${HOSPITAL.phoneE164}`}
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-primary shadow-lg transition-all hover:scale-105"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-bold text-primary shadow-lg transition-all hover:scale-105 hover:shadow-xl"
                 >
                   <Phone className="h-4 w-4" />
-                  अभी कॉल करें
+                  अभी कॉल करें - {HOSPITAL.phoneDisplay}
                 </a>
               </div>
             </div>
