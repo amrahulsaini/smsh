@@ -53,15 +53,20 @@ export async function POST(request: NextRequest) {
         INSERT INTO gallery_images (image_url, title, category)
         VALUES (${blob.url}, ${title}, ${category})
       `;
-    } catch (dbError) {
-      console.error("Database error:", dbError);
-      // If database fails, still return success with manual instructions
+      
+      console.log("Image saved to database successfully");
+    } catch (dbError: any) {
+      console.error("Database error details:", dbError);
+      console.error("Error name:", dbError.name);
+      console.error("Error message:", dbError.message);
+      
+      // Even if database fails, image is uploaded to blob, so return success
       return NextResponse.json({
         success: true,
         fileName,
         imageUrl: blob.url,
-        warning: "Image uploaded but database unavailable. Add this to gallery.json: " + 
-                 JSON.stringify({ src: blob.url, title, category }),
+        message: "Image uploaded successfully! (Database save failed - image stored in blob)",
+        dbError: dbError.message,
       });
     }
 
@@ -69,7 +74,7 @@ export async function POST(request: NextRequest) {
       success: true,
       fileName,
       imageUrl: blob.url,
-      message: "Image uploaded successfully!",
+      message: "Image uploaded and saved to database successfully!",
     });
   } catch (error) {
     console.error("Upload error:", error);
