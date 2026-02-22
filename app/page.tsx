@@ -27,18 +27,10 @@ import {
 import { HOSPITAL, mapsLink, whatsappLink } from "../components/site-constants";
 
 export default function Home() {
-  const [showBanner, setShowBanner] = useState(false);
-
-  useEffect(() => {
-    const bannerClosed = localStorage.getItem("medicalCampBannerClosed");
-    if (!bannerClosed) {
-      setShowBanner(true);
-    }
-  }, []);
+  const [showBanner, setShowBanner] = useState(true);
 
   const closeBanner = () => {
     setShowBanner(false);
-    localStorage.setItem("medicalCampBannerClosed", "true");
   };
 
   return (
@@ -46,57 +38,31 @@ export default function Home() {
       {/* Medical Camp Banner Modal */}
       {showBanner && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-2 sm:p-4 md:p-6"
-          style={{ animation: 'fadeIn 0.4s ease-out' }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          style={{ animation: 'fadeIn 0.3s ease-out' }}
           onClick={closeBanner}
         >
           <div 
-            className="relative w-full max-w-5xl"
-            style={{ animation: 'slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
+            className="relative w-full max-w-2xl"
+            style={{ animation: 'slideUp 0.4s ease-out' }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={closeBanner}
-              className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 z-10 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-red-600 text-white shadow-2xl transition-all duration-300 hover:from-red-600 hover:to-red-700 hover:scale-110 hover:rotate-90 active:scale-95 border-4 border-white"
+              className="absolute -top-2 -right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-red-600 text-white shadow-lg transition-all hover:bg-red-700 hover:scale-110"
               aria-label="Close banner"
             >
-              <X className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={3} />
+              <X className="h-4 w-4" strokeWidth={3} />
             </button>
             
-            {/* Banner Card */}
-            <div className="relative overflow-hidden rounded-3xl shadow-2xl bg-gradient-to-br from-orange-50 to-red-50 p-2 sm:p-3 md:p-4 border-4 sm:border-8 border-white transform transition-all duration-300">
-              {/* Decorative Elements */}
-              <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-br from-secondary/20 to-transparent rounded-full blur-3xl"></div>
-              
-              {/* Image Container */}
-              <div className="relative overflow-hidden rounded-2xl shadow-xl bg-white">
-                <img
-                  src="/gall/medical-camp-feb2026.jpeg"
-                  alt="Free Medical Camp - Dr. Prithvi Giri - February 22, 2026"
-                  className="w-full h-auto object-contain transition-transform duration-500 hover:scale-[1.02]"
-                />
-                
-                {/* Gradient Overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-              
-              {/* Bottom Info Bar */}
-              <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 rounded-xl p-3 sm:p-4 border-2 border-primary/20">
-                <div className="text-center sm:text-left">
-                  <p className="text-xs sm:text-sm font-bold text-primary">📅 February 22, 2026 | 🕐 9 AM - 2 PM</p>
-                  <p className="text-[10px] sm:text-xs text-slate-600 mt-1">Sahara Multi Speciality Hospital, Rajgarh</p>
-                </div>
-                <a
-                  href={`tel:${HOSPITAL.phoneE164}`}
-                  className="shrink-0 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95"
-                >
-                  <Phone className="h-3 w-3 sm:h-4 sm:w-4" />
-                  <span className="hidden sm:inline">Call Now</span>
-                  <span className="sm:hidden">{HOSPITAL.phoneDisplay}</span>
-                </a>
-              </div>
+            {/* Banner Image */}
+            <div className="overflow-hidden rounded-xl shadow-2xl">
+              <img
+                src="/gall/medical-camp-feb2026.jpeg"
+                alt="Free Medical Camp - Dr. Prithvi Giri - February 22, 2026"
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </div>
