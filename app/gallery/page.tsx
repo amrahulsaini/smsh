@@ -1,23 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Image as ImageIcon, Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
 
-const GALLERY = [
-  { src: "/gall/hospital-outer1.jpeg", title: "Hospital Building Exterior", category: "Building" },
-  { src: "/gall/hospital-outer2.jpeg", title: "Hospital Front View", category: "Building" },
-  { src: "/gall/reception1.jpeg", title: "Main Reception Area", category: "Reception" },
-  { src: "/gall/reception2.jpeg", title: "Reception Desk", category: "Reception" },
-  { src: "/gall/consultation1.jpeg", title: "Doctor Consultation", category: "Services" },
-  { src: "/gall/beds1.jpeg", title: "Patient Beds Area", category: "Rooms" },
-  { src: "/gall/beds3.jpeg", title: "ICU", category: "Rooms" },
-  { src: "/gall/lift1.jpeg", title: "Modern Elevator", category: "Facilities" },
-  { src: "/gall/medicines-shop1.jpeg", title: "Hospital Pharmacy", category: "Pharmacy" },
-  { src: "/gall/medicines-shop2.jpeg", title: "Medicine Counter", category: "Pharmacy" },
-];
+interface GalleryImage {
+  src: string;
+  title: string;
+  category: string;
+}
 
 export default function GalleryPage() {
+  const [gallery, setGallery] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/gallery.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setGallery(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }, []);
   const [fullscreenImage, setFullscreenImage] = useState<number | null>(null);
 
   const openFullscreen = (idx: number) => {
@@ -30,15 +37,26 @@ export default function GalleryPage() {
 
   const nextImage = () => {
     if (fullscreenImage !== null) {
-      setFullscreenImage((fullscreenImage + 1) % GALLERY.length);
+      setFullscreenImage((fullscreenImage + 1) % gallery.length);
     }
   };
 
   const prevImage = () => {
     if (fullscreenImage !== null) {
-      setFullscreenImage((fullscreenImage - 1 + GALLERY.length) % GALLERY.length);
+      setFullscreenImage((fullscreenImage - 1 + gallery.length) % gallery.length);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-muted to-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="h-12 w-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-600">Loading gallery...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-muted to-background">
@@ -73,7 +91,7 @@ export default function GalleryPage() {
 
         {/* Gallery Grid */}
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
-          {GALLERY.map((item, idx) => (
+          {gallery.map((item, idx) => (
             <figure
               key={item.src}
               className="group relative overflow-hidden rounded-2xl border-2 border-border bg-background shadow-lg transition-all hover:border-primary hover:shadow-2xl animate-[slide-up_0.6s_ease-out]"
@@ -170,17 +188,17 @@ export default function GalleryPage() {
             {/* Image */}
             <div className="relative max-h-[90vh] max-w-[90vw] p-4">
               <img
-                src={GALLERY[fullscreenImage].src}
-                alt={GALLERY[fullscreenImage].title}
+                src={gallery[fullscreenImage].src}
+                alt={gallery[fullscreenImage].title}
                 className="h-auto max-h-[85vh] w-auto max-w-full rounded-lg object-contain shadow-2xl"
               />
               
               {/* Image Info */}
               <div className="absolute bottom-8 left-1/2 -translate-x-1/2 rounded-full border border-white/20 bg-black/60 px-6 py-3 backdrop-blur-sm">
                 <div className="text-center">
-                  <div className="text-sm font-bold text-white">{GALLERY[fullscreenImage].title}</div>
+                  <div className="text-sm font-bold text-white">{gallery[fullscreenImage].title}</div>
                   <div className="mt-1 text-xs text-white/80">
-                    {fullscreenImage + 1} / {GALLERY.length}
+                    {fullscreenImage + 1} / {gallery.length}
                   </div>
                 </div>
               </div>
