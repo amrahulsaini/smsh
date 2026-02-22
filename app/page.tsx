@@ -43,56 +43,40 @@ export default function Home() {
           onClick={closeBanner}
         >
           <div 
-            className="relative w-full max-w-3xl"
+            className="relative w-full max-w-md"
             style={{ animation: 'slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)' }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={closeBanner}
-              className="absolute -top-3 -right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-red-700 text-white shadow-xl transition-all hover:scale-110 hover:rotate-90 border-2 border-white"
+              className="absolute -top-2 -right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-red-600 text-white shadow-xl transition-all hover:bg-red-700 hover:scale-110 border-2 border-white"
               aria-label="Close banner"
             >
-              <X className="h-5 w-5" strokeWidth={2.5} />
+              <X className="h-4 w-4" strokeWidth={2.5} />
             </button>
             
             {/* Banner Card */}
-            <div className="bg-gradient-to-br from-white via-orange-50 to-white rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
-              {/* Card Header */}
-              <div className="bg-gradient-to-r from-primary via-secondary to-primary p-3 text-center">
-                <h3 className="text-white font-bold text-lg sm:text-xl flex items-center justify-center gap-2">
-                  <Sparkles className="h-5 w-5" />
-                  निःशुल्क चिकित्सा शिविर
-                  <Sparkles className="h-5 w-5" />
-                </h3>
+            <div className="bg-white rounded-xl shadow-2xl overflow-hidden border-2 border-gray-200">
+              {/* Image */}
+              <div className="relative">
+                <img
+                  src="/gall/medical-camp-feb2026.jpeg"
+                  alt="Free Medical Camp - Dr. Prithvi Giri - February 22, 2026"
+                  className="w-full h-auto"
+                  style={{ maxHeight: '500px', objectFit: 'contain' }}
+                />
               </div>
               
-              {/* Image Container */}
-              <div className="p-3 sm:p-4">
-                <div className="overflow-hidden rounded-xl shadow-lg bg-white border-2 border-gray-200">
-                  <img
-                    src="/gall/medical-camp-feb2026.jpeg"
-                    alt="Free Medical Camp - Dr. Prithvi Giri - February 22, 2026"
-                    className="w-full h-auto"
-                  />
-                </div>
-              </div>
-              
-              {/* Card Footer */}
-              <div className="bg-gradient-to-r from-orange-100 via-red-50 to-orange-100 p-4 border-t-2 border-primary/20">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-                  <div className="text-center sm:text-left">
-                    <p className="text-sm font-bold text-gray-800">📅 22 फरवरी 2026, रविवार</p>
-                    <p className="text-xs text-gray-600 mt-1">🕐 सुबह 9 बजे से दोपहर 2 बजे तक</p>
-                  </div>
-                  <a
-                    href={`tel:${HOSPITAL.phoneE164}`}
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl active:scale-95"
-                  >
-                    <Phone className="h-4 w-4" />
-                    अभी कॉल करें
-                  </a>
-                </div>
+              {/* Footer */}
+              <div className="bg-gradient-to-r from-primary to-secondary p-3 text-center">
+                <a
+                  href={`tel:${HOSPITAL.phoneE164}`}
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-primary shadow-lg transition-all hover:scale-105"
+                >
+                  <Phone className="h-4 w-4" />
+                  अभी कॉल करें
+                </a>
               </div>
             </div>
           </div>
