@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Phone,
@@ -19,12 +22,50 @@ import {
   Shield,
   Building2,
   Bot,
+  X,
 } from "lucide-react";
 import { HOSPITAL, mapsLink, whatsappLink } from "../components/site-constants";
 
 export default function Home() {
+  const [showBanner, setShowBanner] = useState(false);
+
+  useEffect(() => {
+    const bannerClosed = localStorage.getItem("medicalCampBannerClosed");
+    if (!bannerClosed) {
+      setShowBanner(true);
+    }
+  }, []);
+
+  const closeBanner = () => {
+    setShowBanner(false);
+    localStorage.setItem("medicalCampBannerClosed", "true");
+  };
+
   return (
     <div className="w-full">
+      {/* Medical Camp Banner Modal */}
+      {showBanner && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 animate-[fade-in_0.3s_ease-out]">
+          <div className="relative w-full max-w-4xl animate-[slide-up_0.4s_ease-out]">
+            <button
+              onClick={closeBanner}
+              className="absolute -top-4 -right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-red-600 text-white shadow-2xl transition-all hover:bg-red-700 hover:scale-110"
+              aria-label="Close banner"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <div className="overflow-hidden rounded-2xl shadow-2xl border-4 border-white">
+              <img
+                src="/gall/medical-camp-feb2026.jpeg"
+                alt="Free Medical Camp - Dr. Prithvi Giri - February 22, 2026"
+                className="w-full h-auto object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-light via-background to-secondary-light">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -111,21 +152,6 @@ export default function Home() {
                   <div className="text-xs font-semibold text-white/90">Services</div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Medical Camp Announcement */}
-      <section className="bg-gradient-to-r from-orange-50 to-red-50 py-8 border-y-4 border-primary">
-        <div className="mx-auto w-full max-w-6xl px-4">
-          <div className="flex flex-col items-center">
-            <div className="w-full max-w-4xl overflow-hidden rounded-2xl shadow-2xl border-4 border-white">
-              <img
-                src="/gall/medical-camp-feb2026.jpeg"
-                alt="Free Medical Camp - Dr. Prithvi Giri - February 22, 2026"
-                className="w-full h-auto object-contain"
-              />
             </div>
           </div>
         </div>
