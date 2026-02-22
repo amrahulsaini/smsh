@@ -83,7 +83,7 @@ export default function GalleryPage() {
           <div className="flex items-center gap-3 rounded-2xl border-2 border-primary/20 bg-primary-light p-4">
             <ImageIcon className="h-8 w-8 text-primary" />
             <div>
-              <div className="text-2xl font-extrabold text-foreground">{GALLERY.length}</div>
+              <div className="text-2xl font-extrabold text-foreground">{gallery.length}</div>
               <div className="text-sm font-semibold text-slate-700">Photos</div>
             </div>
           </div>
