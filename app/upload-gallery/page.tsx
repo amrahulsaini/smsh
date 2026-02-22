@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { Upload, Image as ImageIcon, Lock, CheckCircle, X } from "lucide-react";
 import Link from "next/link";
 
@@ -14,10 +14,18 @@ export default function UploadGalleryPage() {
   // Form fields
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Building");
+  const [customCategory, setCustomCategory] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [galleryImages, setGalleryImages] = useState<any[]>([]);
 
-  const categories = ["Building", "Reception", "Services", "Rooms", "Facilities", "Pharmacy", "Other"];
+  const categories = ["Building", "Reception", "Services", "Rooms", "Facilities", "Pharmacy", "Other", "Custom"];
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadGalleryImages();
+    }
+  }, [isAuthenticated]);
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
@@ -48,13 +56,19 @@ export default function UploadGalleryPage() {
       return;
     }
 
+    const finalCategory = category === "Custom" ? customCategory : category;
+    if (!finalCategory) {
+      setError("Please enter a category name");
+      return;
+    }
+
     setUploading(true);
     setError("");
 
     const formData = new FormData();
     formData.append("image", imageFile);
     formData.append("title", title);
-    formData.append("category", category);
+    formData.append("category", finalCategory);
 
     try {
       const response = await fetch("/api/upload-gallery", {
@@ -68,16 +82,55 @@ export default function UploadGalleryPage() {
         setUploadSuccess(true);
         setTitle("");
         setCategory("Building");
+        setCustomCategory("");
         setImageFile(null);
         setPreviewUrl(null);
+        loadGalleryImages();
         setTimeout(() => setUploadSuccess(false), 3000);
       } else {
         setError(data.error || "Upload failed");
       }
     } catch (err) {
+      console.error("Upload error:", err);
       setError("Upload failed. Please try again.");
     } finally {
       setUploading(false);
+    }
+  };
+
+  const loadGalleryImages = async () => {
+    try {
+      const response = await fetch("/gallery.json");
+      const data = await response.json();
+      setGalleryImages(data);
+    } catch (err) {
+      console.error("Failed to load gallery:", err);
+    }
+  };
+
+  const handleDelete = async (imageSrc: string) => {
+    if (!confirm("Are you sure you want to delete this image?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/delete-gallery", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ src: imageSrc }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        loadGalleryImages();
+        setUploadSuccess(true);
+        setTimeout(() => setUploadSuccess(false), 3000);
+      } else {
+        setError(data.error || "Delete failed");
+      }
+    } catch (err) {
+      setError("Delete failed. Please try again.");
     }
   };
 
@@ -229,6 +282,23 @@ export default function UploadGalleryPage() {
               </select>
             </div>
 
+            {/* Custom Category Input */}
+            {category === "Custom" && (
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  Custom Category Name
+                </label>
+                <input
+                  type="text"
+                  value={customCategory}
+                  onChange={(e) => setCustomCategory(e.target.value)}
+                  className="w-full px-4 py-3 border-2 border-border rounded-lg focus:border-primary focus:outline-none transition-colors"
+                  placeholder="Enter custom category name"
+                  required
+                />
+              </div>
+            )}
+
             {error && (
               <div className="bg-red-50 border-2 border-red-200 rounded-lg p-3 flex items-center gap-2 text-red-700 text-sm">
                 <X className="h-4 w-4" />
@@ -254,6 +324,44 @@ export default function UploadGalleryPage() {
               )}
             </button>
           </form>
+
+          {/* Gallery Images List */}
+          <div className="mt-12 border-t-2 border-border pt-8">
+            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+              <ImageIcon className="h-6 w-6 text-primary" />
+              Current Gallery Images ({galleryImages.length})
+            </h2>
+            
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {galleryImages.map((img, idx) => (
+                <div key={idx} className="relative group rounded-lg overflow-hidden border-2 border-border bg-white shadow hover:shadow-lg transition-all">
+                  <img
+                    src={img.src}
+                    alt={img.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-3">
+                    <p className="font-semibold text-sm text-foreground truncate">{img.title}</p>
+                    <p className="text-xs text-slate-600 mt-1">{img.category}</p>
+                  </div>
+                  <button
+                    onClick={() => handleDelete(img.src)}
+                    className="absolute top-2 right-2 h-8 w-8 rounded-full bg-red-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700"
+                    aria-label="Delete image"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+            
+            {galleryImages.length === 0 && (
+              <div className="text-center py-12 text-slate-500">
+                <ImageIcon className="h-12 w-12 mx-auto mb-3 opacity-50" />
+                <p>No images in gallery yet</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

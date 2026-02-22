@@ -16,9 +16,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate filename
+    // Validate file type
+    if (!image.type.startsWith("image/")) {
+      return NextResponse.json(
+        { error: "File must be an image" },
+        { status: 400 }
+      );
+    }
+
+    // Generate filename - sanitize category name
     const timestamp = Date.now();
-    const fileName = `${category.toLowerCase()}-${timestamp}.jpeg`;
+    const sanitizedCategory = category.toLowerCase().replace(/[^a-z0-9]/g, "-");
+    const fileExtension = image.name.split(".").pop() || "jpg";
+    const fileName = `${sanitizedCategory}-${timestamp}.${fileExtension}`;
     
     // Convert file to buffer
     const bytes = await image.arrayBuffer();
@@ -57,7 +67,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json(
-      { error: "Failed to upload image" },
+      { error: `Failed to upload image: ${error instanceof Error ? error.message : "Unknown error"}` },
       { status: 500 }
     );
   }
