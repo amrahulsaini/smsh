@@ -116,6 +116,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Medical Camp Announcement */}
+      <section className="bg-gradient-to-r from-orange-50 to-red-50 py-8 border-y-4 border-primary">
+        <div className="mx-auto w-full max-w-6xl px-4">
+          <div className="flex flex-col items-center">
+            <div className="w-full max-w-4xl overflow-hidden rounded-2xl shadow-2xl border-4 border-white">
+              <img
+                src="/gall/medical-camp-feb2026.jpeg"
+                alt="Free Medical Camp - Dr. Prithvi Giri - February 22, 2026"
+                className="w-full h-auto object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us */}
       <section className="border-y border-border bg-background py-16">
         <div className="mx-auto w-full max-w-7xl px-4">
