@@ -214,6 +214,11 @@ export default function UploadGalleryPage() {
             </div>
           )}
 
+          <div className="mb-6 bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
+            <p className="font-semibold mb-1">⚠️ Note:</p>
+            <p>Gallery upload feature requires Vercel Blob Storage. Please contact the administrator to enable this feature or manually update the gallery.json file in the repository.</p>
+          </div>
+
           <form onSubmit={handleUpload} className="space-y-6">
             {/* Image Upload */}
             <div>

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, readFile } from "fs/promises";
-import { join } from "path";
+import { put } from "@vercel/blob";
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,44 +23,51 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      return NextResponse.json(
+        { error: "Image upload not configured. Please add BLOB_READ_WRITE_TOKEN environment variable in Vercel." },
+        { status: 500 }
+      );
+    }
+
     // Generate filename - sanitize category name
     const timestamp = Date.now();
     const sanitizedCategory = category.toLowerCase().replace(/[^a-z0-9]/g, "-");
     const fileExtension = image.name.split(".").pop() || "jpg";
     const fileName = `${sanitizedCategory}-${timestamp}.${fileExtension}`;
-    
-    // Convert file to buffer
-    const bytes = await image.arrayBuffer();
-    const buffer = Buffer.from(bytes);
 
-    // Save to public/gall
-    const filePath = join(process.cwd(), "public", "gall", fileName);
-    await writeFile(filePath, buffer);
+    // Upload to Vercel Blob
+    const blob = await put(`gall/${fileName}`, image, {
+      access: "public",
+    });
 
-    // Update gallery data file
-    const galleryDataPath = join(process.cwd(), "public", "gallery.json");
+    // Get existing gallery data
+    const galleryResponse = await fetch(`${process.env.VERCEL_URL || "http://localhost:3000"}/api/get-gallery`);
     let galleryData = [];
-    
-    try {
-      const existingData = await readFile(galleryDataPath, "utf-8");
-      galleryData = JSON.parse(existingData);
-    } catch {
-      // File doesn't exist, start with empty array
+    if (galleryResponse.ok) {
+      galleryData = await galleryResponse.json();
     }
 
     // Add new entry
-    galleryData.push({
-      src: `/gall/${fileName}`,
+    const newEntry = {
+      src: blob.url,
       title: title,
       category: category,
-    });
+    };
+    
+    galleryData.push(newEntry);
 
     // Save updated gallery data
-    await writeFile(galleryDataPath, JSON.stringify(galleryData, null, 2));
+    await fetch(`${process.env.VERCEL_URL || "http://localhost:3000"}/api/save-gallery`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(galleryData),
+    });
 
     return NextResponse.json({
       success: true,
       fileName,
+      imageUrl: blob.url,
       message: "Image uploaded successfully",
     });
   } catch (error) {
