@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { put } from "@vercel/blob";
+import { sql } from "@vercel/postgres";
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,14 +35,41 @@ export async function POST(request: NextRequest) {
       access: "public",
     });
 
-    // Return success with the blob URL
-    // Note: You'll need to manually add this to gallery.json or use a database
+    // Try to save to database
+    try {
+      // Create table if it doesn't exist
+      await sql`
+        CREATE TABLE IF NOT EXISTS gallery_images (
+          id SERIAL PRIMARY KEY,
+          image_url TEXT NOT NULL,
+          title TEXT NOT NULL,
+          category TEXT NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+      `;
+
+      // Insert new image
+      await sql`
+        INSERT INTO gallery_images (image_url, title, category)
+        VALUES (${blob.url}, ${title}, ${category})
+      `;
+    } catch (dbError) {
+      console.error("Database error:", dbError);
+      // If database fails, still return success with manual instructions
+      return NextResponse.json({
+        success: true,
+        fileName,
+        imageUrl: blob.url,
+        warning: "Image uploaded but database unavailable. Add this to gallery.json: " + 
+                 JSON.stringify({ src: blob.url, title, category }),
+      });
+    }
+
     return NextResponse.json({
       success: true,
       fileName,
       imageUrl: blob.url,
-      message: "Image uploaded successfully! Add this entry to gallery.json: " + 
-               JSON.stringify({ src: blob.url, title, category }),
+      message: "Image uploaded successfully!",
     });
   } catch (error) {
     console.error("Upload error:", error);

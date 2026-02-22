@@ -85,9 +85,11 @@ export default function UploadGalleryPage() {
         setCustomCategory("");
         setImageFile(null);
         setPreviewUrl(null);
+        loadGalleryImages();
         
-        // Show the entry to copy
-        alert(`Image uploaded!\n\nCopy this and add to gallery.json:\n${JSON.stringify({ src: data.imageUrl, title, category: finalCategory }, null, 2)}`);
+        if (data.warning) {
+          alert(data.warning);
+        }
         
         setTimeout(() => setUploadSuccess(false), 3000);
       } else {
@@ -103,7 +105,7 @@ export default function UploadGalleryPage() {
 
   const loadGalleryImages = async () => {
     try {
-      const response = await fetch("/gallery.json");
+      const response = await fetch("/api/get-gallery");
       const data = await response.json();
       setGalleryImages(data);
     } catch (err) {
@@ -217,9 +219,9 @@ export default function UploadGalleryPage() {
             </div>
           )}
 
-          <div className="mb-6 bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
-            <p className="font-semibold mb-1">⚠️ Note:</p>
-            <p>After uploading, you'll need to manually copy the provided JSON entry and add it to <code className="bg-yellow-100 px-1 rounded">public/gallery.json</code> in your repository, then commit and push the changes.</p>
+          <div className="mb-6 bg-blue-50 border-2 border-blue-200 rounded-lg p-4 text-sm text-blue-800">
+            <p className="font-semibold mb-1">ℹ️ Info:</p>
+            <p>Images are automatically saved to the database. They will appear in the gallery immediately after upload.</p>
           </div>
 
           <form onSubmit={handleUpload} className="space-y-6">

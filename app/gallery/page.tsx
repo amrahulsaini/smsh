@@ -15,7 +15,7 @@ export default function GalleryPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/gallery.json")
+    fetch("/api/get-gallery")
       .then((res) => res.json())
       .then((data) => {
         setGallery(data);
